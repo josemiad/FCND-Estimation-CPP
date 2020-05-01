@@ -21,6 +21,8 @@ To do this, We run scenario 6 and we see the values between the GPS sensor are. 
 
 I use the values 0.725 for MeasuredStdDev_GPSPosXY and 0.5 for MeasuredStdDev_AccelXY. After change that we obtain the next results.
 
+![Quad Image](./images/step1.png)
+
 
 We don't want that the home position was the started position of the dron, the drone needs to be able to star planning from anywhere.
 
