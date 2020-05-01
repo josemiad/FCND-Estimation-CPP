@@ -74,22 +74,10 @@ The results are in this picture:
 
 ![Quad Image](./images/step5.png)
 
-#### 6. Cull waypoints 
+#### Step 6: Adding Your Controller
 
-Finally, we want to eliminate the points in the same line to reduce the number of waypoint. To do in we use the collinearity os three consecutive point and eliminate it if is unnecessary. 
+Here we only need to copy the code of the proyect we did before, after do it we obtain the next result for the path of the drone.
 
-This function is implemented in [line 171 to 192] (planning_utils.py#L171-L192) of `planning_utils.py`.
+![Quad Image](./images/step6.png)
 
-We call this function after calculate the path in [line 162](motion_planning.py#L162) of `motion_planning.py`.
-
-Here you can see the path after prune it!!
-
-![Top Down View](./images/prune_path.png)
-
-
-### Execute the flight
-
-Here is a photo while the drone execute the flight!!
-
-![Top Down View](./images/flight.png)
 
