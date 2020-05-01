@@ -23,13 +23,14 @@ I use the values 0.725 for MeasuredStdDev_GPSPosXY and 0.5 for MeasuredStdDev_Ac
 ![Quad Image](./images/step1.png)
 
 
-#### 2. Set your current local position
+#### Step 2: Attitude Estimation
 
-the drone need to be able to takeoff from anywhere but the starter code assumed the drone takes off from map center.
+In this point, we have change a complementary filter-type attitude filter for a nonlinear Complementary Filter, to improve the rate gyro attitude integration scheme. 
 
-With the drone's current position in geodetic coordinates from self.global_position, and the global home position set from last step from self.global_home, We use the global_to_local() function to convert the current global position to local position.
+First, we calculate que quaternion with the estimated roll, pitch and yaw. With this quaternion, we integrate the body rate to obtain the predicted pitch, roll and yaw. Then we normalize yaw to [-pi,pi].
 
-I did this in [line 130](motion_planning.py#L130) of `motion_planning.py`.
+Doing it, we obtain a attitude estimator to get within 0.1 rad for each of the Euler angles for at least 3 seconds. 
+
 
 
 #### 3. Set grid start position from local position
