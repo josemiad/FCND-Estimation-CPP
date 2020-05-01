@@ -31,6 +31,7 @@ First, we calculate que quaternion with the estimated roll, pitch and yaw. With 
 
 Doing it, we obtain a attitude estimator to get within 0.1 rad for each of the Euler angles for at least 3 seconds. 
 
+![Quad Image](./images/step2.png)
 
 
 #### 3. Set grid start position from local position
