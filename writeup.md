@@ -66,7 +66,7 @@ We obtain the next results:
 
 ![Quad Image](./images/step4_b.png)
 
-#### Closed Loop + GPS Update
+#### Step 5: Closed Loop + GPS Update
 
 Here, the main is to write the EKF GPS Update in the function UpdateFromGPS(). To do this, like before, we calcule the hprime from the measurement model of the GPS. After that, we only need to multiply the hprime and the actual state of the drone to calculate the stimation. After that we update tha values. 
 
