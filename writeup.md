@@ -1,5 +1,4 @@
 ## Project: Building an Estimator
-![Quad Image](./misc/enroute.png)
 
 ---
 
@@ -23,12 +22,6 @@ I use the values 0.725 for MeasuredStdDev_GPSPosXY and 0.5 for MeasuredStdDev_Ac
 
 ![Quad Image](./images/step1.png)
 
-
-We don't want that the home position was the started position of the dron, the drone needs to be able to star planning from anywhere.
-
-Fist, we read the firt line of the csv file to set the global drone home position. After read that, I set it to home position with self.set_home_possition()
-
-You can find it in [line 124](motion_planning.py#L124) of `motion_planning.py` and [line 161 to 168](planning_utils.py#L161-L168) of `planning_utils.py`.
 
 #### 2. Set your current local position
 
