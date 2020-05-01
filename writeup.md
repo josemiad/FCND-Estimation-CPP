@@ -54,11 +54,17 @@ After have the functions, we need to tune the QPosXYStd and the QVelXYStd proces
 
 
 
-#### 4. Set grid goal position from geodetic coords
+#### Step 4: Magnetometer Update
 
-In this step, like before, I take a latitude and longitude that the user chose, and then I use the global_to_local function to get the local position in the grid.
+This scenario uses a realistic IMU. First we need to tune the parameter QYawStd. After tune it we obtain this results. There the covariance it too high because this values are retuned in the next point.
 
-I did it in [line 145 to 153](motion_planning.py#L145-153) of `motion_planning.py`.
+![Quad Image](./images/step4_a.png)
+
+After tune the parameters, we implement magnetometer update in the function UpdateFromMag(). To do it we only need to take the hprime from the measurement model of the magnetometer, take the diference between current estimated yaw and the measure. We normalize the values between [-pi,pi] and then we update the values.
+
+We obtain the next results:
+
+![Quad Image](./images/step4_b.png)
 
 #### 5. Modify A* to include diagonal motion (or replace A* altogether)
 
