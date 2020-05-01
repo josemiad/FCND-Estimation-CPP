@@ -66,18 +66,13 @@ We obtain the next results:
 
 ![Quad Image](./images/step4_b.png)
 
-#### 5. Modify A* to include diagonal motion (or replace A* altogether)
+#### Closed Loop + GPS Update
 
-To modify this I needed change tow things.
+Here, the main is to write the EKF GPS Update in the function UpdateFromGPS(). To do this, like before, we calcule the hprime from the measurement model of the GPS. After that, we only need to multiply the hprime and the actual state of the drone to calculate the stimation. After that we update tha values. 
 
-* First, the cost inside the class Action, to add the cost of the diagonal movements. You can find this in [line 58 to 61](planning_utils.py#L58-L61) of `planning_utils.py`.
+The results are in this picture:
 
-* Second, in the valid_actions function, I added 4 more if conditions to check the new states. That's in [line 91 to 98](planning_utils.py#L91-L98) of `planning_utils.py`.
-
-Here's you can see in the first image the old function with rectangular movements and the seconds image with the new function with diagonal movements 
-![Top Down View](./images/rect_path.png)
-
-![Top Down View](./images/diag_path.png)
+![Quad Image](./images/step5.png)
 
 #### 6. Cull waypoints 
 
