@@ -29,16 +29,30 @@ In this point, we have change a complementary filter-type attitude filter for a 
 
 First, we calculate que quaternion with the estimated roll, pitch and yaw. With this quaternion, we integrate the body rate to obtain the predicted pitch, roll and yaw. Then we normalize yaw to [-pi,pi].
 
-Doing it, we obtain a attitude estimator to get within 0.1 rad for each of the Euler angles for at least 3 seconds. 
+Doing it, we obtain a attitude estimator to get within 0.1 rad for each of the Euler angles for at least 3 seconds.
 
 ![Quad Image](./images/step2.png)
 
 
-#### 3. Set grid start position from local position
+#### Step 3: Prediction Step
 
-The starter code hardcoded the map center as the start point for planning. To further enhance the flexibility to the start location, I changed this to be the current local position in line 142 to 144 of motion_planning.py.
+First, we run scene 8 to implement the state prediction step with an IMU with no noise. To implement it, we take the actual state of the drone and increase it dt.
 
-I change the code to take the current local position of the drone as the start point. I did it in [line 141 to 143](motion_planning.py#L141-143) of `motion_planning.py`.
+With positions we did it directly, but with the velocities we need to rotate the accel vector from body frame to inertial frame.
+
+After that we can calculate the predicted velocities correctly, taking care with de z velocity where we need to subtract the gravity force.
+
+![Quad Image](./images/step3_a.png)
+
+After, we run te scene 9, which have an IMU with noise. To  calculate the partial derivative of the body-to-global rotation matrix in the function GetRbgPrime(), we use the matrix of the transition model to calculate it. This is just a matter of putting the right sin() and cos() functions in the right place.
+
+Once I have GetRbgPrime() function implement, I am goint to implement the rest of the prediction step (Predict function). To implement this function, we only need to use to calculate de gprime that we find in the transition model and then update the covariance matrix, that it is a function of himself, the gprime matrix and the transition model covariance.
+
+After have the functions, we need to tune the QPosXYStd and the QVelXYStd process parameters in QuadEstimatorEKF.txt to try to capture the magnitude of the error we see. When I have tune the parameters, we obtain this results: 
+
+![Quad Image](./images/step3_b.png)
+
+
 
 #### 4. Set grid goal position from geodetic coords
 
